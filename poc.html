@@ -1,0 +1,155 @@
+<!-- Winter Is Coming -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>PS3 Playground :: POC Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This site's description is not available due to the robots.txt">
+    <meta name="author" content="Specter">
+    <!-- Le styles -->
+    <link rel="stylesheet" type="text/css" href="css/metro-bootstrap.css">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+	<nav class="navbar navbar-inverse" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="./index.html">PS3 Playground</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="./index.html">Welcome</a></li>
+        <li><a href="./sysinfo.html">System Info (Coming Soon)</a></li>
+        <li><a href="./dump.html">Memory/Module Dumper (Coming Soon)</a></li>
+        <li><a href="#">File Browser (Coming Soon)</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Latest Compatible Firmware: 4.81</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+    <div class="container">
+
+		<!-- Jumbotron -->
+    <script>
+	  var isDebug = false;
+	  var isPlaystation = false;
+      var disableFeatures = false;
+      var ua = navigator.userAgent;
+	  var uaStringCheck = ua.substring(ua.indexOf("5.0 (") + 5, ua.indexOf(") Apple") - 7);
+	  var fwVersion = ua.substring(ua.indexOf("5.0 (") + 19, ua.indexOf(") Apple"));
+	  
+	  // Compatible Firmware Versions
+	  var fwCompat = ["3.55", "4.81"];
+
+      // If the system is not a playstation, disable features, display error
+	  switch (uaStringCheck)
+	  {
+		case "PLAYSTATION":
+        isPlaystation = true;
+		break;
+		
+		default:
+		document.write('<div class="alert alert-danger"><strong>You are not on a PlayStation System!</strong> The "Run POC" button and all other features have been disabled</div>');
+        disableFeatures = true;
+        isPlaystation = false;
+		break;
+	  }
+	  
+	  // If the system is a playstation, ensure the version is 3.55 or 4.81!
+	  if (isPlaystation)
+	  {
+		  switch (fwVersion)
+		  {
+			// Compatible Firmware Version Detected
+			case "3.55": case "4.81":
+			document.write('<div class="alert alert-success"><strong>Congratulations!</strong> We\'ve detected your PlayStation 3 is running FW ' + fwVersion + ', which is compatible with PS3 Playground! Enjoy!</div>');
+			break;
+			
+			// No Compatible Firmware Version Was Detected
+			default:
+			document.write('<div class="alert alert-danger"><strong>Your PS3 is not on FW 4.81!</strong> Your current running FW version is ' + fwVersion + ', which is not compatible with PS3 Playground. The "Evaluate" button and all other features have been disabled</div>');
+			disableFeatures = true;
+			break;
+		  }
+	  }
+
+	  // Useful for local js debugging
+	  if (isDebug)
+	  {
+		// Test different version numbers here
+		//fwVersion = "4.82";
+		alert("uaStringCheck: " + uaStringCheck);
+		alert("isPlaystation: " + isPlaystation);
+		alert("fwVersion: " + fwVersion);
+		alert("fwCompat: " + fwCompat);
+	  }
+	  
+    </script>
+
+    <div class="jumbotron">
+      <h1>PS3 POC (JavaScript) Test</h1>
+      <p class="lead">
+        <h3 id="codeExecutionStage">Stage: Not Started</h3>
+        <br />
+        <h3><strong>Technical Information</strong></h3>
+        <h4 id="vtableAddress">VTable Address: NOT FOUND</h4>
+        <h4 id="webkitAddress">WebKit Module Base Address: NOT FOUND</h4>
+        <h4 id="bufferAddress">Buffer Base Address: NOT FOUND</h4>
+        <h4 id="uint32Address">Unsigned Int32 Address: NOT FOUND</h4>
+      </p>
+      <hr />
+      <a id="runPocLink" onclick="runPOC('', true)"><button id="runPocBtn" type="button" class="btn btn-danger">Run POC</button></a>
+      <script>
+        if(!isPlaystation)
+        {
+          document.getElementById("runPocBtn").disabled = true;
+          document.getElementById("runPocLink").onclick = "";
+        }
+      </script>
+    </div>
+
+	  <hr>
+
+    <!-- Site footer -->
+    <div class="footer">
+      <p>Copyright &copy; PS3 Playground <script>document.write('' + Date().substring(11, 15) + "");</script></p>
+    </div>
+
+    </div> <!-- /container -->
+    <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- Site Scripts -->
+    <script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+	  <script type="text/javascript" src="js/bootstrap.js"></script>
+	  <script type="text/javascript" src="js/jquery.validate.js"></script>
+	  <script type="text/javascript" src="js/jquery.validate.unobtrusive.js"></script>
+	  <script type="text/javascript" src="js/logger.js"></script>
+
+    <!-- Exploitation Scripts -->
+    <script src="scripts/long.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/rop.js"></script>
+    <script src="scripts/gadgets.js"></script>
+    <script src="scripts/exploit.js"></script>
+</html>

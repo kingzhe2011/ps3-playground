@@ -1,0 +1,21 @@
+These are useful references about WebKit, ROP, Exploitation, etc
+
+
+PlayStation 3 Browser Investigation for PS3 Devs <-- Special Thanks to cakehonolulu @ PSX-HAX
+https://cakehonolulu.github.io/writeups/0x01.html
+
+
+PS Vita Level 1: Webkitties
+http://acez.re/ps-vita-level-1-webkitties-3/
+
+WebKit Everywhere: Secure or Not?
+https://www.blackhat.com/docs/eu-14/materials/eu-14-Chen-WebKit-Everywhere-Secure-Or-Not-WP.pdf
+
+Exploiting 64-bit Linux like a boss
+https://scarybeastsecurity.blogspot.co.uk/2013/02/exploiting-64-bit-linux-like-boss.html
+
+Attacking the Webkit heap [Or how to write Safari exploits]
+https://www.slideshare.net/seguridadapple/attacking-the-webkit-heap-or-how-to-write-safari-exploits
+
+
+

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>PS3 Playground :: Documentation [SETUP]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This site's description is not available due to the robots.txt">
+    <meta name="author" content="Specter">
+    <!-- Le styles -->
+    <link rel="stylesheet" type="text/css" href="../css/metro-bootstrap.css">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+	<nav class="navbar navbar-default" role="navigation">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">PS3 Playground Documentation</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse navbar-ex1-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="index.html">Index</a></li>
+        <li class="active"><a href="#">Setting Up</a></li>
+        <li><a href="notes.html">Notes (Syscalls, Modules, Etc.)</a></li>
+        <li><a href="changelog.html">Change Log</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="https://github.com/esc0rtd3w/ps3-playground" target="_blank">@GitHub</a></li>
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</nav>
+    <div class="container">
+
+		<!-- Jumbotron -->
+		<div class="jumbotron">
+      <h1>Setting Up PS3 Playground</h1>
+      <h2><div style="color: #3189CA;"><b>Introduction</b></div></h2>
+      <p class="lead">
+        To use these links, you can simply go into your PS3's web browser and go to the address, the same goes for localhosting via xampp or something similar. This guide will cover how to setup a basic localhost and how to get DNS spoofing working so you can get to PS3 Playground straight through the PS3 web browser.
+      </p>
+      <hr />
+      <h3>Quick Links</h3>
+      <ul style="list-style: none;">
+        <li><a href="#xampp">Setting up an xampp server</a></li>
+        <li><a href="#ipadd">Setting your computer's IP address</a></li>
+        <li><a href="#spoof">Spoofing DNS</a></li>
+      </ul>
+      <hr /><br />
+      <a name="xampp"></a>
+      <h2><div style="color: #3189CA;"><b>Setting up an xampp server</b></div></h2>
+      <p>
+        To setup a local server, the easiest solution is probably Xampp. Download it from the site linked, and ensure Apache as well as PHP are checked when selecting components. You should also ensure it is installed at <i>C:/xampp/</i>, as the path should not have any spaces in it. Now when you open xampp, you should see a window like this appear:
+        <br /><br />
+        <center><img src="http://i.imgur.com/1w3CpdJ.png" /></center>
+      </p>
+      <hr /><br />
+      <a name="ipadd"></a>
+      <h2><div style="color: #3189CA;"><b>Getting your computer's IP address</b></div></h2>
+      <p>
+        We will need the computer's IP address that is running xampp, even if you're not spoofing DNS and just using the web browser, as you will need it for the URL. For windows machines, just open the command prompt (cmd.exe) and type "ipconfig". For mac users, open the terminal and type "ifconfig". Scroll until you see "Subnet Mask" (it should be equal to 255.255.255.0). Above this you should see IPv4 Address (this is your LAN address, not your public IP address). This is what you need.
+      </p>
+      <p>
+        Now if you're going to use the browser, just open the browser and type the IPv4 address you just found into the web browser + '/document/en/ps3' (only if you used method one, if you used method two or three above, you can just type the IPv4 address).
+      </p>
+      <hr /><br />
+      <a name="spoof"></a>
+      <h2><div style="color: #3189CA;"><b>Spoofing DNS</b></div></h2>
+      <p>
+        You will need to install <a href="https://www.python.org/downloads/windows/">Python for windows</a>. Install python 2.7.12, as Python 3.5.2 is different in terms of syntax and will most likely cause fakedns.py to run into errors. Once Python is installed, all you need to do is open command prompt (cmd.exe) or terminal on mac, and run fakedns.py with "python fakedns.py" (not including quotes). When you do so, you should see the following:
+        <center><img src="http://i.imgur.com/neDKJVk.png" /></center>
+      </p>
+      <hr /><br />
+      <h2><div style="color: #3189CA;"><b>That's It!</b></div></h2>
+      <p>We now have access to the PS3 Playground on our system. Happy exploring!</p>
+    </div>
+
+	  <hr>
+
+    <!-- Site footer -->
+    <div class="footer">
+      <p>Copyright &copy; PS3 Playground <script>document.write('' + Date().substring(11, 15) + "");</script></p>
+    </div>
+
+    </div> <!-- /container -->
+    <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36060270-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+webkit-test-SHA1SUM
+2d37902d68b63ca204326d044eb7a3622b8aa7ca  cairo-patches-test.tar.gz
+5e1aa95a429f2279c3d6e2bda65d0cac6d8bc620  cairo-test.tar.gz
+dfafbac90946fa481895692e34dd5278b7d39647  mallocreplace-test.tar.gz
+cf595302be8164b68a1058b0f1fa596ac38a44b1  ps3-compat-test.tar.gz
+c65deb83eb5210317bbdbf987f90f94c9abc98e0  ps3-exports-test.tar.gz
+29bae9e31f1c8fe06c24b94514578137611f5932  webkit-patches-test.tar.gz
+ae1704789f1540648c862b4faa4eb10a31166cd8  webkit-test.tar.gz
