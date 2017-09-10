@@ -1,5 +1,5 @@
 # PS3 Playground
-A collection of PS3 tools and experiments using the WebKit exploit. This is for firmware 4.81 only at the moment.
+A collection of PS3 tools and experiments using the WebKit, Flash, and other options. This is for firmware 4.81 only at the moment.
 
 
 THIS REPO IS FOR THE PUBLIC PS3 COMMUNITY TO EXPLORE AND TEST ON THEIR OWN
