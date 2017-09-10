@@ -8,7 +8,7 @@ THIS REPO IS FOR THE PUBLIC PS3 COMMUNITY TO EXPLORE AND TEST ON THEIR OWN
 
 OUR TEAM IS CURRENTLY WORKING ON THIS PROJECT PRIVATELY AND WILL UPDATE WHEN FINISHED!
 
-FOR A LIVE DEMO WITH PUBLIC TESTS TO TRY OUT, PLEASE VISIT: http://www.websploit.org/ps3/ps3-playground/
+FOR A LIVE DEMO WITH PUBLIC TESTS TO TRY OUT, PLEASE VISIT: http://www.websploit.org/ps3/ps3-playground/test/
 
 
 There are a lot of files here for reference and exploration.
