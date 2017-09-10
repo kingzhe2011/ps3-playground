@@ -11,11 +11,9 @@ OUR TEAM IS CURRENTLY WORKING ON THIS PROJECT PRIVATELY AND WILL UPDATE WHEN FIN
 FOR A LIVE DEMO WITH PUBLIC TESTS TO TRY OUT, PLEASE VISIT: http://www.websploit.org/ps3/ps3-playground/
 
 
-There are a lot of files here for reference and exploration. Once more testing has been done, these will be cleaned up over time.
+There are a lot of files here for reference and exploration.
 
-What is working:
-
-- Detects firmware version and handles it based upon version
+Once more testing has been done, these will be cleaned up over time.
 
 
 
