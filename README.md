@@ -1,7 +1,7 @@
 # PS3 Playground
 A collection of PS3 tools and experiments using the WebKit, Flash, and other options.
 
-We are only testing on firmware 4.81 only at the moment.
+We are only testing on firmware 4.81 at the moment.
 =
 All hardware revisions will be supported [A0x-P0x/2xxx/3xxx/4xxx] on OFW/CFW 4.81
 
