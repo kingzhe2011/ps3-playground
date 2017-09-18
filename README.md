@@ -3,7 +3,7 @@ A collection of PS3 tools and experiments using the WebKit, Flash, and other opt
 
 We are only testing on firmware 4.81 only at the moment.
 =
-All hardware revisions will be supported [A0x-P0x/20xx/21xx/25xx/3xxx/4xxx] on OFW 4.81
+All hardware revisions will be supported [A0x-P0x/20xx/21xx/25xx/3xxx/4xxx] on OFW/CFW 4.81
 
 
 THIS REPO IS FOR THE PUBLIC PS3 COMMUNITY TO EXPLORE AND TEST ON THEIR OWN
