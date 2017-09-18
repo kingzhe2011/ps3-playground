@@ -1,5 +1,5 @@
 # PS3 Playground
-A collection of PS3 tools and experiments using the WebKit, Flash, and other options.
+A collection of PS3 tools and experiments using WebKit, Flash, and other options.
 
 We are only testing on firmware 4.81 at the moment.
 =
