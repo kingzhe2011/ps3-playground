@@ -1,0 +1,142 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Simplified PowerPC Instruction Set</title>
+  </head>
+  <body background="Simplified%20PowerPC%20Instruction%20Set_files/background.jpg">
+    <h1>Simplified PowerPC Instruction Set</h1>
+
+<p>Below, the instruction set for the PowerPC architecture is given. A lot of instructions were intentionally left out:</p>
+
+<ul>
+  <li>Instructions for 64-bit Implementations Only</li>
+  <li>Floating Point Instructions</li>
+  <li>Supervisor-Level Instructions</li>
+  <li>I/O-specific Instructions</li>
+  <li>Instructions for Multiprocessor Support</li>
+  <li>Trap / System Call Instructions</li>
+</ul>
+
+<p>This leaves 107 instructions: the <i>core</i> PowerPC Instruction Set.</p>
+
+<p>When following the links below, you will be taken to a page 
+describing a (family of) instructions. Note that these descriptions are 
+taken from the 64-bit version of the instruction set; bit numbering are 
+different for some instructions on 32-bit implementations. The lab 
+course software uses a 32-bit PowerPC emulator.</p>
+
+<p>The mnemonics column shows all valid forms of an instruction; it also shows simplified mnemonics in <i>italics</i>.</p>
+    <table border="1" bgcolor="#FFFFCC">
+      <tbody><tr><th>Instruction                      </th><th>Mnemonics                                        </th><th>Description                                   </th></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/add.html">add   </a></td><td>add / add. / addo / addo.                        </td><td>Add                                           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/addc.html">addc  </a></td><td>addc / addc. / addco /addco.                     </td><td>Add Carrying                                  </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/adde.html">adde  </a></td><td>adde / adde. / addeo /addeo.                     </td><td>Add Extended                                  </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/addi.html">addi  </a></td><td>addi / <i>li</i> / <i>la</i> / <i>subi</i>       </td><td>Add Immediate                                 </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/addic.html">addic </a></td><td>addic / <i>subic</i>                             </td><td>Add Immediate Carrying                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/addic-dot.html">addic.</a></td><td>addic. / <i>subic.</i>                           </td><td>Add Immediate Carrying and Record             </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/addis.html">addis </a></td><td>addis / <i>lis</i> / <i>subis</i>                </td><td>Add Immediate Shifted                         </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/addme.html">addme </a></td><td>addme / addme. / addmeo / addmeo.                </td><td>Add to Minus One Extended                     </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/addze.html">addze </a></td><td>addze / addze. / addzeo / addzeo.                </td><td>Add to Zero Extended                          </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/and.html">and   </a></td><td>and / and.                                       </td><td>AND                                           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/andc.html">andc  </a></td><td>andc / andc.                                     </td><td>AND with Complement                           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/andi-dot.html">andi. </a></td><td>andi.                                            </td><td>AND Immediate                                 </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/andis-dot.html">andis.</a></td><td>andis.                                           </td><td>AND Immediate Shifted                         </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/b.html">b     </a></td><td>b / ba / bl / bla                                </td><td>Branch                                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/bc.html">bc    </a></td><td>bc /bca / bcl bcla                               </td><td>Branch Conditional                            </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/bcctr.html">bcctr </a></td><td>bcctr / bcctrl                                   </td><td>Branch Conditional to Count Register          </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/bclr.html">bclr  </a></td><td>bclr / bclrl                                     </td><td>Branch Conditional to Link Register           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/cmp.html">cmp   </a></td><td>cmp / <i>cmpw</i>                                </td><td>Compare                                       </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/cmpi.html">cmpi  </a></td><td>cmpi / <i>cmpwi</i>                              </td><td>Compare Immediate                             </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/cmpl.html">cmpl  </a></td><td>cmpl / <i>cmplw</i>                              </td><td>Compare Logical                               </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/cmpli.html">cmpli </a></td><td>cmpli / <i>cmplwi</i>                            </td><td>Compare Logical Immediate                     </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/cntlzw.html">cntlzw</a></td><td>cntlzw / cntlzw.                                 </td><td>Count Leading Zeros Word                      </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/crand.html">crand </a></td><td>crand                                            </td><td>Condition Register AND                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/crandc.html">crandc</a></td><td>crandc                                           </td><td>Condition Register AND with Complement        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/creqv.html">creqv </a></td><td>creqv / <i>crset</i>                             </td><td>Condition Register Equivalent                 </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/crnand.html">crnand</a></td><td>crnand                                           </td><td>Condition Register NAND                       </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/crnor.html">crnor </a></td><td>crnor / <i>crnot</i>                             </td><td>Condition Register NOR                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/cror.html">cror  </a></td><td>cror  / <i>crmove</i>                            </td><td>Condition Register OR                         </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/crorc.html">crorc </a></td><td>crorc                                            </td><td>Condition Register OR with Complement         </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/crxor.html">crxor </a></td><td>crxor / <i>crclr</i>                             </td><td>Condition Register XOR                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/divw.html">divw  </a></td><td>divw / divw. / divwo / divwo.                    </td><td>Divide Word                                   </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/divwu.html">divwu </a></td><td>divwu / divwu. / divwuo / divwuo.                </td><td>Divide Word Unsigned                          </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/eqv.html">eqv   </a></td><td>eqv / eqv.                                       </td><td>Equivalent                                    </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/extsb.html">extsb </a></td><td>extsb / extsb.                                   </td><td>Extend Sign Byte                              </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/extsh.html">extsh </a></td><td>extsh / extsh.                                   </td><td>Extend Sign Half Word                         </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lbz.html">lbz   </a></td><td>lbz                                              </td><td>Load Byte and Zero                            </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lbzu.html">lbzu  </a></td><td>lbzu                                             </td><td>Load Byte and Zero with Update                </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lbzux.html">lbzux </a></td><td>lbzux                                            </td><td>Load Byte and Zero with Update Indexed        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lbzx.html">lbzx  </a></td><td>lbzx                                             </td><td>Load Byte and Zero Indexed                    </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lha.html">lha   </a></td><td>lha                                              </td><td>Load Half Word Algebraic                      </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lhau.html">lhau  </a></td><td>lhau                                             </td><td>Load Half Word Algebraic with Update          </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lhaux.html">lhaux </a></td><td>lhaux                                            </td><td>Load Half Word Algebraic with Update Indexed  </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lhax.html">lhax  </a></td><td>lhax                                             </td><td>Load Half Word Algebraic Indexed              </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lhbrx.html">lhbrx </a></td><td>lhbrx                                            </td><td>Load Half Word Byte-Reverse Indexed           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lhz.html">lhz   </a></td><td>lhz                                              </td><td>Load Half Word and Zero                       </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lhzu.html">lhzu  </a></td><td>lhzu                                             </td><td>Load Half Word and Zero with Update           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lhzux.html">lhzux </a></td><td>lhzux                                            </td><td>Load Half Word and Zero with Update Indexed   </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lhzx.html">lhzx  </a></td><td>lhzx                                             </td><td>Load Half Word and Zero Indexed               </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lmw.html">lmw   </a></td><td>lmw                                              </td><td>Load Multiple Word                            </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lswi.html">lswi  </a></td><td>lswi                                             </td><td>Load String Word Immediate                    </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lswx.html">lswx  </a></td><td>lswx                                             </td><td>Load String Word Indexed                      </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lwbrx.html">lwbrx </a></td><td>lwbrx                                            </td><td>Load Word Byte-Reversed Indexed               </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lwz.html">lwz   </a></td><td>lwz                                              </td><td>Load Word and Zero                            </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lwzu.html">lwzu  </a></td><td>lwzu                                             </td><td>Load Word and Zero with Update                </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lwzux.html">lwzux </a></td><td>lwzux                                            </td><td>Load Word and Zero with Update Indexed        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/lwzx.html">lwzx  </a></td><td>lwzx                                             </td><td>Load Word and Zero Indexed                    </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mcrf.html">mcrf  </a></td><td>mcrf                                             </td><td>Move Condition Regisiter Field                </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mcrxr.html">mcrxr </a></td><td>mcrxr                                            </td><td>Move to Condition Register from XER           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mfcr.html">mfcr  </a></td><td>mfcr                                             </td><td>Move from Condition Register                  </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mfspr.html">mfspr </a></td><td>mfspr / <i>mfxer</i> / <i>mflr</i> / <i>mfctr</i></td><td>Move from Special-Purpose Register            </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mftb.html">mftb  </a></td><td>mftb                                             </td><td>Move from Time Base                           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mtcrf.html">mtcrf </a></td><td>mtcrf                                            </td><td>Move to Condition Register Fields             </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mtspr.html">mtspr </a></td><td>mtspr / <i>mtxer</i> / <i>mtlr</i> / <i>mtctr</i></td><td>Move to Special-Purpose Register              </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mulhw.html">mulhw </a></td><td>mulhw / mulhw.                                   </td><td>Multiply High Word                            </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mulhwu.html">mulhwu</a></td><td>mulhwu / mulhwu.                                 </td><td>Multiply High Word Unsigned                   </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mulli.html">mulli </a></td><td>mulli                                            </td><td>Multiply Low Immediate                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/mullw.html">mullw </a></td><td>mullw / mullw. / mullwo / mullwo.                </td><td>Multiply Low Word                             </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/nand.html">nand  </a></td><td>nand / nand.                                     </td><td>NAND                                          </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/neg.html">neg   </a></td><td>neg / neg. / nego / nego.                        </td><td>Negate                                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/nor.html">nor   </a></td><td>nor /nor.                                        </td><td>NOR                                           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/or.html">or    </a></td><td>or / or.                                         </td><td>OR                                            </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/orc.html">orc   </a></td><td>orc / orc.                                       </td><td>OR with Complement                            </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/ori.html">ori   </a></td><td>ori                                              </td><td>OR Immediate                                  </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/oris.html">oris  </a></td><td>oris                                             </td><td>OR Immediate Shifted                          </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/rlwimi.html">rlwimi</a></td><td>rlwimi / rlwimi. / <i>inslwi</i> / <i>insrwi</i> </td><td>Rotate Left Word Immediate then Mask Insert   </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/rlwinm.html">rlwinm</a></td><td>rlwinm / rlwinm. / <i>extlwi</i> / <i>extrwi</i><br>
+                                                        <i>rotlwi</i> / <i>rotrwi</i> / <i>slwi</i> / <i>srwi</i><br>
+                                                        <i>clrlwi</i> / <i>clrrwi</i> / <i>clrlslwi</i>  </td><td>Rotate Left Word Immediate then AND with Mask </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/rlwnm.html">rlwnm </a></td><td>rlwnm / rlwnm. / <i>rotlw</i>                    </td><td>Rotate Left Word then AND with Mask           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/slw.html">slw   </a></td><td>slw / slw.                                       </td><td>Shift Left Word                               </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/sraw.html">sraw  </a></td><td>sraw /sraw.                                      </td><td>Shift Right Algebraic Word                    </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/srawi.html">srawi </a></td><td>srawi / srawi.                                   </td><td>Shift Right Algebraic Word Immediate          </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/srw.html">srw   </a></td><td>srw / srw.                                       </td><td>Shift Right Word                              </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stb.html">stb   </a></td><td>stb                                              </td><td>Store Byte                                    </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stbu.html">stbu  </a></td><td>stbu                                             </td><td>Store Byte with Update                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stbux.html">stbux </a></td><td>stbux                                            </td><td>Store Byte with Update Indexed                </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stbx.html">stbx  </a></td><td>stbx                                             </td><td>Store Byte Indexed                            </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/sth.html">sth   </a></td><td>sth                                              </td><td>Store Half Word                               </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/sthbrx.html">sthbrx</a></td><td>sthbrx                                           </td><td>Store Half Word Byte-Reverse Indexed          </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/sthu.html">sthu  </a></td><td>sthu                                             </td><td>Store Half Word with Update                   </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/sthux.html">sthux </a></td><td>sthux                                            </td><td>Store Half Word with Update Indexed           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/sthx.html">sthx  </a></td><td>sthx                                             </td><td>Store Half Word Indexed                       </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stmw.html">stmw  </a></td><td>stmw                                             </td><td>Store Multiple Word                           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stswi.html">stswi </a></td><td>stswi                                            </td><td>Store String Word Immediate                   </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stswx.html">stswx </a></td><td>stswx                                            </td><td>Store String Word Indexed                     </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stw.html">stw   </a></td><td>stw                                              </td><td>Store Word                                    </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stwbrx.html">stwbrx</a></td><td>stwbrx                                           </td><td>Store Word Byte-Reverse Indexed               </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stwu.html">stwu  </a></td><td>stwu                                             </td><td>Store Word with Update                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stwux.html">stwux </a></td><td>stwux                                            </td><td>Store Word with Update Indexed                </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/stwx.html">stwx  </a></td><td>stwx                                             </td><td>Store Word Indexed                            </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/subf.html">subf  </a></td><td>subf / subf. / subfo / subfo. / <i>sub</i>       </td><td>Subtract From                                 </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/subfc.html">subfc </a></td><td>subfc / subfc. / subfco / subfco. / <i>subc</i>  </td><td>Subtract from Carrying                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/subfe.html">subfe </a></td><td>subfe / subfe. / subfeo. / subfeo.               </td><td>Subtrect from Extended                        </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/subfic.html">subfic</a></td><td>subfic                                           </td><td>Subtract from Immediate Carrying              </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/subfme.html">subfme</a></td><td>subfme / subfme. / subfmeo / subfmeo.            </td><td>Subtract from Minus One Extended              </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/subfze.html">subfze</a></td><td>subfze / subfze. / subfzeo / subfzeo.            </td><td>Subtract from Zero Extended                   </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/xor.html">xor   </a></td><td>xor / xor.                                       </td><td>XOR                                           </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/xori.html">xori  </a></td><td>xori                                             </td><td>XOR Immediate                                 </td></tr>
+      <tr><td><a href="http://www.ds.ewi.tudelft.nl/vakken/in101/labcourse/instruction-set/xoris.html">xoris </a></td><td>xoris                                            </td><td>XOR Immediate Shifted                         </td></tr>
+    </tbody></table>
+  
+
+</body></html>

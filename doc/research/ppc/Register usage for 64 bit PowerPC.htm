@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!--Converted with LaTeX2HTML 2008 (1.71)
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>Register usage for 64 bit PowerPC</title>
+<meta name="description" content="Register usage for 64 bit PowerPC">
+<meta name="keywords" content="atlas_contrib">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+
+<meta name="Generator" content="LaTeX2HTML v2008">
+<meta http-equiv="Content-Style-Type" content="text/css">
+
+<link rel="STYLESHEET" href="Register%20usage%20for%2064%20bit%20PowerPC_files/atlas_contrib.css">
+
+<link rel="next" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node97.html">
+<link rel="previous" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node95.html">
+<link rel="up" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node95.html">
+<link rel="next" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node97.html">
+</head>
+
+<body>
+
+<div class="navigation"><!--Navigation Panel-->
+<a name="tex2html1440" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node97.html">
+<img alt="next" src="Register%20usage%20for%2064%20bit%20PowerPC_files/next.htm" width="37" border="0" align="BOTTOM" height="24"></a> 
+<a name="tex2html1436" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node95.html">
+<img alt="up" src="Register%20usage%20for%2064%20bit%20PowerPC_files/up.htm" width="26" border="0" align="BOTTOM" height="24"></a> 
+<a name="tex2html1430" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node95.html">
+<img alt="previous" src="Register%20usage%20for%2064%20bit%20PowerPC_files/prev.htm" width="63" border="0" align="BOTTOM" height="24"></a> 
+<a name="tex2html1438" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node1.html">
+<img alt="contents" src="Register%20usage%20for%2064%20bit%20PowerPC_files/contents.htm" width="65" border="0" align="BOTTOM" height="24"></a>  
+<br>
+<b> Next:</b> <a name="tex2html1441" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node97.html">The calling sequence and</a>
+<b> Up:</b> <a name="tex2html1437" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node95.html">Some notes on PowerPC</a>
+<b> Previous:</b> <a name="tex2html1431" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node95.html">Some notes on PowerPC</a>
+ &nbsp; <b>  <a name="tex2html1439" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node1.html">Contents</a></b> 
+<br>
+<br></div>
+<!--End of Navigation Panel-->
+
+<h3><a name="SECTION00094100000000000000">
+Register usage for 64 bit PowerPC</a>
+</h3>
+The register usage for PPC64 is given in Table&nbsp;<a href="#tab-PPC64-regs">6</a>.
+
+<p>
+<br></p><p></p>
+<div align="CENTER"><a name="1336"></a>
+<table>
+<caption><strong>Table 6:</strong>
+Register usage for 64-bit PowerPC assembly</caption>
+<tbody><tr><td>
+<div align="CENTER">
+<table cellpadding="3" border="1" align="CENTER">
+<tbody><tr><td align="LEFT">&nbsp;</td>
+<td align="LEFT">&nbsp;</td>
+<td align="LEFT">CALLEE</td>
+</tr>
+<tr><td align="LEFT">REGISTER</td>
+<td align="LEFT">USAGE</td>
+<td align="LEFT">SAVE</td>
+</tr>
+<tr><td colspan="3" align="CENTER"><span><b>Integer Registers</b></span></td>
+</tr>
+<tr><td align="LEFT">r0<a name="tex2html9" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/footnode.html#foot1478"><sup><span class="arabic">1</span></sup></a></td>
+<td align="LEFT">Used in prolog/epilog</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">r1</td>
+<td align="LEFT">Stack pointer</td>
+<td align="LEFT">YES</td>
+</tr>
+<tr><td align="LEFT">r2</td>
+<td align="LEFT">TOC pointer (reserved)</td>
+<td align="LEFT">YES</td>
+</tr>
+<tr><td align="LEFT">r3</td>
+<td align="LEFT">1st para/return val</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">r4-r10</td>
+<td align="LEFT">3-8th  para</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">r11</td>
+<td align="LEFT">Environment pointer</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">r12</td>
+<td align="LEFT">Used by global linkage</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">r13</td>
+<td align="LEFT"><b>reserved</b> system thread ID</td>
+<td align="LEFT">N/A</td>
+</tr>
+<tr><td align="LEFT">r14-31</td>
+<td align="LEFT">Global int registers</td>
+<td align="LEFT">YES</td>
+</tr>
+<tr><td colspan="3" align="CENTER"><span><b>Floating Point Registers</b></span></td>
+</tr>
+<tr><td align="LEFT">f0</td>
+<td align="LEFT">Scratch reg</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">f1-13</td>
+<td align="LEFT">1-13th fp para</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">f14-f31</td>
+<td align="LEFT">Global fp regs</td>
+<td align="LEFT">YES</td>
+</tr>
+<tr><td colspan="3" align="CENTER"><span><b>Special Registers</b></span></td>
+</tr>
+<tr><td align="LEFT">LR</td>
+<td align="LEFT">Link register</td>
+<td align="LEFT">YES</td>
+</tr>
+<tr><td align="LEFT">CTR</td>
+<td align="LEFT">Count register</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">XER</td>
+<td align="LEFT">Fixed pt exception</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">FPSCR</td>
+<td align="LEFT">fp status &amp; ctrl</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">CR0-CR7</td>
+<td align="LEFT">Condition reg fields, each 4 bits wide</td>
+<td align="LEFT">2, 3, 4 : YES</td>
+</tr>
+<tr><td colspan="3" align="CENTER"><span><b>Vector Registers</b></span></td>
+</tr>
+<tr><td align="LEFT">v0-v1</td>
+<td align="LEFT">scratch regs</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">v2-v13</td>
+<td align="LEFT">vec para regs</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">v14-v19</td>
+<td align="LEFT">scratch regs</td>
+<td align="LEFT">NO</td>
+</tr>
+<tr><td align="LEFT">v20-v31</td>
+<td align="LEFT">global vregs</td>
+<td align="LEFT">YES</td>
+</tr>
+<tr><td align="LEFT">vrsave</td>
+<td align="LEFT">(32 bits)</td>
+<td align="LEFT">YES</td>
+</tr>
+</tbody></table>
+
+<a name="tab-PPC64-regs"></a>.
+
+</div></td></tr>
+</tbody></table>
+</div><p></p>
+<br>
+
+<p>
+
+</p><div class="navigation"><hr>
+<!--Navigation Panel-->
+<a name="tex2html1440" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node97.html">
+<img alt="next" src="Register%20usage%20for%2064%20bit%20PowerPC_files/next.htm" width="37" border="0" align="BOTTOM" height="24"></a> 
+<a name="tex2html1436" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node95.html">
+<img alt="up" src="Register%20usage%20for%2064%20bit%20PowerPC_files/up.htm" width="26" border="0" align="BOTTOM" height="24"></a> 
+<a name="tex2html1430" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node95.html">
+<img alt="previous" src="Register%20usage%20for%2064%20bit%20PowerPC_files/prev.htm" width="63" border="0" align="BOTTOM" height="24"></a> 
+<a name="tex2html1438" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node1.html">
+<img alt="contents" src="Register%20usage%20for%2064%20bit%20PowerPC_files/contents.htm" width="65" border="0" align="BOTTOM" height="24"></a>  
+<br>
+<b> Next:</b> <a name="tex2html1441" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node97.html">The calling sequence and</a>
+<b> Up:</b> <a name="tex2html1437" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node95.html">Some notes on PowerPC</a>
+<b> Previous:</b> <a name="tex2html1431" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node95.html">Some notes on PowerPC</a>
+ &nbsp; <b>  <a name="tex2html1439" href="http://math-atlas.sourceforge.net/devel/atlas_contrib/node1.html">Contents</a></b> </div>
+<!--End of Navigation Panel-->
+<address>
+Clint Whaley
+2012-07-10
+</address>
+
+
+</body></html>
